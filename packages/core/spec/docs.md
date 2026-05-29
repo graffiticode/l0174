@@ -1,13 +1,13 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
-# L0003 User Manual
+# L0174 User Manual
 
 **Introduction**
 
 *Graffiticode* is a collection of domain languages used for creating task
-specific web apps. **L0003** is a *Graffiticode* language for writing
+specific web apps. **L0174** is a *Graffiticode* language for writing
 'hello, world' web apps.
 
-L0003 can be used as a template for creating other, presumably more
+L0174 can be used as a template for creating other, presumably more
 interesting and useful, languages.
 
 ### Overview

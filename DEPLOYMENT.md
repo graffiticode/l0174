@@ -55,17 +55,17 @@ For more control over the deployment process:
 
 ```bash
 # Build the Docker image locally
-docker build -t gcr.io/YOUR_PROJECT_ID/l0003:latest .
+docker build -t gcr.io/YOUR_PROJECT_ID/l0174:latest .
 
 # Push to Container Registry
-docker push gcr.io/YOUR_PROJECT_ID/l0003:latest
+docker push gcr.io/YOUR_PROJECT_ID/l0174:latest
 
 # Deploy to Cloud Run
-gcloud run deploy l0003 \
-  --image gcr.io/YOUR_PROJECT_ID/l0003:latest \
+gcloud run deploy l0174 \
+  --image gcr.io/YOUR_PROJECT_ID/l0174:latest \
   --platform managed \
   --region us-central1 \
-  --port 50003 \
+  --port 50174 \
   --allow-unauthenticated \
   --set-env-vars AUTH_URL=https://auth.graffiticode.org
 ```
@@ -74,14 +74,14 @@ gcloud run deploy l0003 \
 
 Configure environment variables in Cloud Run:
 
-- `PORT`: Automatically set by Cloud Run (the app defaults to 50003)
+- `PORT`: Automatically set by Cloud Run (the app defaults to 50174)
 - `AUTH_URL`: Authentication service URL (default: https://auth.graffiticode.org)
 - `NODE_ENV`: Set to `production` in the Dockerfile
 
 To update environment variables:
 
 ```bash
-gcloud run services update l0003 \
+gcloud run services update l0174 \
   --region us-central1 \
   --set-env-vars AUTH_URL=https://your-auth-url.com
 ```
@@ -105,12 +105,12 @@ After deployment with `--no-traffic` flag in Cloud Build, you need to route traf
 
 ```bash
 # Route 100% traffic to the latest revision
-gcloud run services update-traffic l0003 \
+gcloud run services update-traffic l0174 \
   --region us-central1 \
   --to-latest
 
 # Or gradually roll out (canary deployment)
-gcloud run services update-traffic l0003 \
+gcloud run services update-traffic l0174 \
   --region us-central1 \
   --to-revisions REVISION_NAME=10
 ```
@@ -121,7 +121,7 @@ To map a custom domain:
 
 ```bash
 gcloud run domain-mappings create \
-  --service l0003 \
+  --service l0174 \
   --domain your-domain.com \
   --region us-central1
 ```
@@ -150,7 +150,7 @@ The Dockerfile is configured for production deployment:
 - Uses Node.js Alpine for smaller image size
 - Installs only production dependencies
 - Builds the application during image creation
-- Exposes port 50003
+- Exposes port 50174
 
 ### Cloud Build Configuration
 
@@ -173,14 +173,14 @@ The `.gcloudignore` file excludes:
 
 ### Common Issues
 
-1. **Port Configuration**: Ensure the app uses `process.env.PORT` and falls back to 50003
+1. **Port Configuration**: Ensure the app uses `process.env.PORT` and falls back to 50174
 2. **Memory Limits**: Cloud Run defaults to 256MB. Increase if needed:
    ```bash
-   gcloud run services update l0003 --memory 512Mi --region us-central1
+   gcloud run services update l0174 --memory 512Mi --region us-central1
    ```
 3. **Cold Starts**: Cloud Run may have cold starts. Consider minimum instances:
    ```bash
-   gcloud run services update l0003 --min-instances 1 --region us-central1
+   gcloud run services update l0174 --min-instances 1 --region us-central1
    ```
 
 ### Rolling Back
@@ -189,10 +189,10 @@ To roll back to a previous revision:
 
 ```bash
 # List revisions
-gcloud run revisions list --service l0003 --region us-central1
+gcloud run revisions list --service l0174 --region us-central1
 
 # Route traffic to specific revision
-gcloud run services update-traffic l0003 \
+gcloud run services update-traffic l0174 \
   --region us-central1 \
   --to-revisions REVISION_NAME=100
 ```

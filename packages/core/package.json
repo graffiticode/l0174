@@ -1,7 +1,7 @@
 {
-  "name": "@graffiticode/l0003",
+  "name": "@graffiticode/l0174",
   "version": "0.1.0",
-  "description": "L0003 — a Graffiticode dialect (hello/image/theme/print) inheriting @graffiticode/l0000",
+  "description": "L0174 — a Graffiticode dialect (hello/image/theme/print) inheriting @graffiticode/l0000",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
-// The embeddable /form bundle for L0003: mounts the shared View (inherited from
-// @graffiticode/l0000-view) with L0003's Form. Also serves as the dev harness.
+// The embeddable /form bundle for L0174: mounts the shared View (inherited from
+// @graffiticode/l0000-view) with L0174's Form. Also serves as the dev harness.
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { View, Form } from "../src";

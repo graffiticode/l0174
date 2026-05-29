@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 import { createApp } from "./app.js";
 
-const port = process.env.PORT || "50003";
+const port = process.env.PORT || "50174";
 const authUrl = process.env.AUTH_URL || "https://auth.graffiticode.org";
 
 const app = createApp({ authUrl });
 app.listen(Number(port), () => {
-  console.log(`L0003 language server listening on ${port} (authUrl ${authUrl})`);
+  console.log(`L0174 language server listening on ${port} (authUrl ${authUrl})`);
 });
 
 process.on("uncaughtException", (err) => {

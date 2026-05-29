@@ -1,9 +1,9 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
-# L0003 Vocabulary
+# L0174 Vocabulary
 
 This specification documents dialect-specific functions available in the
-**L0003** language of Graffiticode. These functions extend the core language
-with additional functionality tailored to L0003 use cases.
+**L0174** language of Graffiticode. These functions extend the core language
+with additional functionality tailored to L0174 use cases.
 
 The core language specification including the definition of its syntax,
 semantics and base library can be found here:

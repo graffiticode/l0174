@@ -5,7 +5,7 @@
 
 set -e
 
-echo "🚀 L0003 GCP Deployment Setup"
+echo "🚀 L0174 GCP Deployment Setup"
 echo "=============================="
 
 # Check if gcloud is installed
@@ -66,24 +66,24 @@ if [ "$DEPLOY_NOW" = "y" ]; then
         echo "🐳 Building and deploying with Docker..."
 
         # Build and push image
-        docker build -t gcr.io/$PROJECT_ID/l0003:initial .
-        docker push gcr.io/$PROJECT_ID/l0003:initial
+        docker build -t gcr.io/$PROJECT_ID/l0174:initial .
+        docker push gcr.io/$PROJECT_ID/l0174:initial
 
         # Deploy to Cloud Run
-        gcloud run deploy l0003 \
-            --image gcr.io/$PROJECT_ID/l0003:initial \
+        gcloud run deploy l0174 \
+            --image gcr.io/$PROJECT_ID/l0174:initial \
             --platform managed \
             --region us-central1 \
-            --port 50003 \
+            --port 50174 \
             --allow-unauthenticated \
             --set-env-vars AUTH_URL=https://auth.graffiticode.org
     else
         echo "🚀 Deploying from source (Cloud Build will build the container)..."
-        gcloud run deploy l0003 \
+        gcloud run deploy l0174 \
             --source . \
             --platform managed \
             --region us-central1 \
-            --port 50003 \
+            --port 50174 \
             --allow-unauthenticated \
             --set-env-vars AUTH_URL=https://auth.graffiticode.org
     fi

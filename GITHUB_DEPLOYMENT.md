@@ -12,7 +12,7 @@ Cloud Build triggers automatically deploy your code when you push to GitHub.
 2. Click "Connect Repository"
 3. Select "GitHub" as the source
 4. Authenticate with GitHub and grant permissions
-5. Select your repository: `graffiticode/l0003`
+5. Select your repository: `graffiticode/l0174`
 6. Click "Connect"
 
 ### Step 2: Create Triggers
@@ -21,8 +21,8 @@ Cloud Build triggers automatically deploy your code when you push to GitHub.
 
 1. Click "Create Trigger"
 2. Configure:
-   - **Name**: `l0003-production-deploy`
-   - **Description**: Deploy L0003 to production on main branch push
+   - **Name**: `l0174-production-deploy`
+   - **Description**: Deploy L0174 to production on main branch push
    - **Event**: Push to a branch
    - **Source**:
      - Repository: Your connected repo
@@ -42,8 +42,8 @@ Cloud Build triggers automatically deploy your code when you push to GitHub.
 
 1. Click "Create Trigger"
 2. Configure:
-   - **Name**: `l0003-staging-deploy`
-   - **Description**: Deploy L0003 staging on branch push
+   - **Name**: `l0174-staging-deploy`
+   - **Description**: Deploy L0174 staging on branch push
    - **Event**: Push to a branch
    - **Source**:
      - Repository: Your connected repo
@@ -60,7 +60,7 @@ Cloud Build triggers automatically deploy your code when you push to GitHub.
 
 1. Click "Create Trigger"
 2. Configure:
-   - **Name**: `l0003-pr-preview`
+   - **Name**: `l0174-pr-preview`
    - **Description**: Deploy preview for pull requests
    - **Event**: Pull request
    - **Configuration**: Cloud Build configuration file
@@ -187,7 +187,7 @@ gcloud services enable iamcredentials.googleapis.com
 
 ```bash
 PROJECT_ID=$(gcloud config get-value project)
-GITHUB_REPO="graffiticode/l0003"
+GITHUB_REPO="graffiticode/l0174"
 
 # Create pool
 gcloud iam workload-identity-pools create "github" \
@@ -240,20 +240,20 @@ In `.github/workflows/deploy-gcp.yml`, update the auth step:
 ## Deployment Environments
 
 ### Production (main branch)
-- URL: https://l0003-[hash]-uc.a.run.app
+- URL: https://l0174-[hash]-uc.a.run.app
 - Full traffic routing
 - Minimum instances: 1
 - Maximum instances: 100
 - Memory: 512Mi
 
 ### Staging (develop branch)
-- URL: https://l0003-staging-[hash]-uc.a.run.app
+- URL: https://l0174-staging-[hash]-uc.a.run.app
 - Full traffic routing
 - Maximum instances: 10
 - Memory: 256Mi
 
 ### Preview (feature branches)
-- URL: https://l0003-[branch-name]-[hash]-uc.a.run.app
+- URL: https://l0174-[branch-name]-[hash]-uc.a.run.app
 - Temporary deployments
 - Auto-cleanup on PR close
 - Maximum instances: 5
@@ -286,11 +286,11 @@ In `.github/workflows/deploy-gcp.yml`, update the auth step:
 ### Using CLI
 ```bash
 # List revisions
-gcloud run revisions list --service=l0003 --region=us-central1
+gcloud run revisions list --service=l0174 --region=us-central1
 
 # Route traffic to specific revision
-gcloud run services update-traffic l0003 \
-  --to-revisions=l0003-00005-abc=100 \
+gcloud run services update-traffic l0174 \
+  --to-revisions=l0174-00005-abc=100 \
   --region=us-central1
 ```
 
@@ -311,7 +311,7 @@ gcloud run services update-traffic l0003 \
 ### Service Not Accessible
 1. Verify `--allow-unauthenticated` flag
 2. Check Cloud Run service URL
-3. Verify port configuration (50003)
+3. Verify port configuration (50174)
 
 ## Cost Optimization
 

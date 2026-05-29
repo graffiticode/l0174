@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
-# L0003 RAG Training Examples
+# L0174 RAG Training Examples
 
-130 example prompts for training a RAG model on the L0003 core language.
+130 example prompts for training a RAG model on the L0174 core language.
 
 ## Category 1: Basic Expressions and Literals (1–20)
 

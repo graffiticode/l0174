@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 /* Copyright (c) 2023, ARTCOMPILER INC */
 //
-// L0003 inherits L0000: its Checker/Transformer extend L0000's, adding handlers for the
-// L0003 vocabulary (hello, image, theme, print) and overriding PROG. Unhandled tags fall
+// L0174 inherits L0000: its Checker/Transformer extend L0000's, adding handlers for the
+// L0174 vocabulary (hello, image, theme, print) and overriding PROG. Unhandled tags fall
 // through to L0000's base handlers via `super`/the shared Visitor dispatch.
 import {
   Checker as BaseChecker,
@@ -112,7 +112,7 @@ export class Transformer extends BaseTransformer {
 }
 
 export const compiler = new Compiler({
-  langID: "0003",
+  langID: "0174",
   version: "v0.0.1",
   Checker,
   Transformer,

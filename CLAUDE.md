@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ### Development
-- **Start dev server**: `npm run dev` (starts API server on port 50003; expects Firestore emulator at 127.0.0.1:8080 and local auth at 127.0.0.1:4100)
+- **Start dev server**: `npm run dev` (starts API server on port 50174; expects Firestore emulator at 127.0.0.1:8080 and local auth at 127.0.0.1:4100)
 - **Build project**: `npm run build` (builds `core` → `api` → `view`, then assembles static bundle into `packages/api/static/`)
 - **Start production**: `npm run start` (runs the built API server)
 
@@ -17,34 +17,34 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Package Management
 - **Build and pack**: `npm run pack` (builds, then packs `packages/view`)
-- **Publish**: `npm run publish` (publishes `@graffiticode/l0003` and `@graffiticode/l0003-view` with public access)
+- **Publish**: `npm run publish` (publishes `@graffiticode/l0174` and `@graffiticode/l0174-view` with public access)
 
 ### Testing
 Vitest is installed at the root but no test runner script is wired up yet, and no `*.spec.*` files exist in the packages.
 
 ### Deployment
 - **GCP Cloud Build**: `npm run gcp:build` (submits `cloudbuild.yaml` to the `graffiticode` project)
-- **GCP Direct Deploy**: `npm run gcp:deploy` (deploys to Cloud Run as `l0003`, region `us-central1`, port `50003`)
+- **GCP Direct Deploy**: `npm run gcp:deploy` (deploys to Cloud Run as `l0174`, region `us-central1`, port `50174`)
 - **View logs**: `npm run gcp:logs`
 
 ## Architecture
 
-L0003 is a Graffiticode dialect — the first child of `@graffiticode/l0000`. It's an npm-workspaces monorepo with three packages.
+L0174 is a Graffiticode dialect — the first child of `@graffiticode/l0000`. It's an npm-workspaces monorepo with three packages.
 
 ### Structure
 
-- **`packages/core/`** — `@graffiticode/l0003`: the language itself. Pure TypeScript.
-  - `src/lexicon.ts`: merges L0000's base lexicon with L0003's additions (`hello`, `image`, `theme`, `id`, plus `DARK`/`LIGHT` tags)
-  - `src/compiler.ts`: `Checker` and `Transformer` classes extending L0000's, adding handlers for the L0003 vocabulary
+- **`packages/core/`** — `@graffiticode/l0174`: the language itself. Pure TypeScript.
+  - `src/lexicon.ts`: merges L0000's base lexicon with L0174's additions (`hello`, `image`, `theme`, `id`, plus `DARK`/`LIGHT` tags)
+  - `src/compiler.ts`: `Checker` and `Transformer` classes extending L0000's, adding handlers for the L0174 vocabulary
   - `spec/`: language documentation, examples, schema, RAG training prompts, etc.
   - `tools/build-static.js`: copies spec content into `dist/static/` for the API to serve
 
-- **`packages/api/`** — `@graffiticode/api-l0003`: Express language server. TypeScript, run via `tsx` in dev and compiled to `dist/` for prod.
+- **`packages/api/`** — `@graffiticode/api-l0174`: Express language server. TypeScript, run via `tsx` in dev and compiled to `dist/` for prod.
   - Routes (`src/routes/`): `compile`, `auth`, `root` (`/form`), plus `index` and shared `utils`
   - Auth integration with `@graffiticode/auth`
-  - Port: 50003 (dev) or `process.env.PORT`
+  - Port: 50174 (dev) or `process.env.PORT`
 
-- **`packages/view/`** — `@graffiticode/l0003-view`: React view component. Vite + TypeScript + Tailwind.
+- **`packages/view/`** — `@graffiticode/l0174-view`: React view component. Vite + TypeScript + Tailwind.
   - `src/components/form/Form.tsx`: language-specific form rendering
   - `src/components/form/ThemeToggle.tsx`: dark/light toggle wired up by the `theme` function
   - `embed/`: standalone HTML entry built by `vite.embed.config.ts` for embedding in the API's static bundle
@@ -60,7 +60,7 @@ L0003 is a Graffiticode dialect — the first child of `@graffiticode/l0000`. It
 
 ### Language Functions
 
-L0003 inherits the full L0000 base vocabulary (arithmetic, lists, lambdas, `map`/`filter`/`reduce`, pattern matching, tags) and adds:
+L0174 inherits the full L0000 base vocabulary (arithmetic, lists, lambdas, `map`/`filter`/`reduce`, pattern matching, tags) and adds:
 
 | Function | Arity | Description |
 |----------|:-----:|-------------|
@@ -80,7 +80,7 @@ User Input → State Update → POST /compile → Compiler (core) → Output Dat
 The embedded form supports iframe embedding and communicates with parent windows via postMessage.
 
 ### Environment Variables
-- `PORT`: API port (default 50003)
+- `PORT`: API port (default 50174)
 - `AUTH_URL`: Auth service URL (default `https://auth.graffiticode.org`; dev uses `http://127.0.0.1:4100`)
 - `FIRESTORE_EMULATOR_HOST`: Local Firestore emulator (dev: `127.0.0.1:8080`)
 - `NODE_ENV`: `development` or `production`

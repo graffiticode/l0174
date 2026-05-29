@@ -9,7 +9,7 @@ const buildPostCompileHandler = ({ compile }: { compile: CompileFn }) =>
     const auth = (req as any).auth?.context ?? "";
     const authToken = parseAuthTokenFromRequest(req);
     try {
-      const data = await compile({ auth, authToken, lang: "0003", ...req.body });
+      const data = await compile({ auth, authToken, lang: "0174", ...req.body });
       res.set("Access-Control-Allow-Origin", "*");
       res.status(200).json(data);
     } catch (error: any) {

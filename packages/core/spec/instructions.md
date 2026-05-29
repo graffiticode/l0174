@@ -1,9 +1,9 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
-# L0003 Dialect Extensions
+# L0174 Dialect Extensions
 
-L0003 is the base dialect of Graffiticode, focused on simple interactions and visualizations.
+L0174 is the base dialect of Graffiticode, focused on simple interactions and visualizations.
 
-## L0003 Functions
+## L0174 Functions
 
 | Function | Signature | Description |
 | :------- | :-------- | :---------- |
@@ -12,12 +12,12 @@ L0003 is the base dialect of Graffiticode, focused on simple interactions and vi
 | `theme` | `<tag record: record>` | Sets UI theme (DARK or LIGHT) wrapping a body expression |
 | `id` | `<string any: record>` | Sets an element identifier |
 
-## L0003 Built-in Tags
+## L0174 Built-in Tags
 
 - `DARK` — dark theme
 - `LIGHT` — light theme
 
-## L0003 Examples
+## L0174 Examples
 
 ### Hello world
 ```
@@ -34,7 +34,7 @@ theme DARK hello "world"..
 image "https://example.com/photo.jpg"..
 ```
 
-### Combining core and L0003 functions
+### Combining core and L0174 functions
 ```
 let name = "world"..
 theme LIGHT hello name..

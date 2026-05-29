@@ -1,5 +1,5 @@
 {
-  "id": "0003",
+  "id": "0174",
   "description": "The base Graffiticode dialect. Evaluates small functional-programming expressions (arithmetic, lists, lambdas, map/filter/reduce, pattern matching, tags) and renders a handful of UI primitives (hello, image, theme, id). Right tool for 'compute this value' or 'render a hello/image/themed greeting' requests; domain-specific artifacts (assessments, spreadsheets, SVG, board content) belong in the higher-numbered dialects.",
   "supported_item_types": [
     "expression",
@@ -34,7 +34,7 @@
     {
       "prompt": "Display the image at https://example.com/photo.jpg.",
       "produces": "rendered_ui",
-      "notes": "Single-primitive UI program using the `image` function — the simplest rendered output L0003 can produce."
+      "notes": "Single-primitive UI program using the `image` function — the simplest rendered output L0174 can produce."
     },
     {
       "prompt": "Define tags `yes` and `no`, then return `true` for `yes` and `false` for `no` using `case`.",

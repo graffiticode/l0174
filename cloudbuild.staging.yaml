@@ -11,9 +11,9 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/l0003-staging:$COMMIT_SHA'
+      - 'gcr.io/$PROJECT_ID/l0174-staging:$COMMIT_SHA'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/l0003-staging:$BRANCH_NAME'
+      - 'gcr.io/$PROJECT_ID/l0174-staging:$BRANCH_NAME'
       - '.'
 
   # Push image to Container Registry
@@ -21,7 +21,7 @@ steps:
     args:
       - push
       - '--all-tags'
-      - 'gcr.io/$PROJECT_ID/l0003-staging'
+      - 'gcr.io/$PROJECT_ID/l0174-staging'
     id: Push
 
   # Deploy to Cloud Run (staging service)
@@ -29,14 +29,14 @@ steps:
     args:
       - run
       - deploy
-      - 'l0003-$BRANCH_NAME'
+      - 'l0174-$BRANCH_NAME'
       - '--platform=managed'
-      - '--image=gcr.io/$PROJECT_ID/l0003-staging:$COMMIT_SHA'
+      - '--image=gcr.io/$PROJECT_ID/l0174-staging:$COMMIT_SHA'
       - >-
         --labels=commit-sha=$COMMIT_SHA,gcb-build-id=$BUILD_ID,gcb-trigger-id=$_TRIGGER_ID,branch=$BRANCH_NAME
       - '--region=$_DEPLOY_REGION'
       - '--quiet'
-      - '--port=50003'
+      - '--port=50174'
       - '--set-env-vars=AUTH_URL=$_AUTH_URL,NODE_ENV=staging,BRANCH=$BRANCH_NAME'
       - '--allow-unauthenticated'
       - '--max-instances=10'
@@ -50,7 +50,7 @@ steps:
       - run
       - services
       - describe
-      - 'l0003-$BRANCH_NAME'
+      - 'l0174-$BRANCH_NAME'
       - '--platform=managed'
       - '--region=$_DEPLOY_REGION'
       - '--format=value(status.url)'
@@ -58,8 +58,8 @@ steps:
     entrypoint: gcloud
 
 images:
-  - 'gcr.io/$PROJECT_ID/l0003-staging:$COMMIT_SHA'
-  - 'gcr.io/$PROJECT_ID/l0003-staging:$BRANCH_NAME'
+  - 'gcr.io/$PROJECT_ID/l0174-staging:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/l0174-staging:$BRANCH_NAME'
 
 options:
   substitutionOption: ALLOW_LOOSE
@@ -70,6 +70,6 @@ substitutions:
   _AUTH_URL: https://auth.graffiticode.org
 
 tags:
-  - l0003
+  - l0174
   - staging
   - $BRANCH_NAME

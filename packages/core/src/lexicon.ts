@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// L0003's lexicon = L0000's base vocabulary + L0003's additions (child keys win on merge).
+// L0174's lexicon = L0000's base vocabulary + L0174's additions (child keys win on merge).
 import { lexicon as base } from "@graffiticode/l0000";
 
 const additions = {

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
-// Uses the L0003 core compiler (its Checker/Transformer extend @graffiticode/l0000).
-import { compiler } from "@graffiticode/l0003";
+// Uses the L0174 core compiler (its Checker/Transformer extend @graffiticode/l0000).
+import { compiler } from "@graffiticode/l0174";
 
 export async function compile({
   code,

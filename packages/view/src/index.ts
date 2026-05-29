@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @graffiticode/l0003-view — L0003's Form, plus the shared View it is injected into
+// @graffiticode/l0174-view — L0174's Form, plus the shared View it is injected into
 // (re-exported from the parent language's view package).
 export { Form } from "./components/form";
 export { View } from "@graffiticode/l0000-view";

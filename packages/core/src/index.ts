@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @graffiticode/l0003 — the L0003 compiler core. Inherits @graffiticode/l0000.
+// @graffiticode/l0174 — the L0174 compiler core. Inherits @graffiticode/l0000.
 export { Checker, Transformer, compiler } from "./compiler.js";
 export { lexicon } from "./lexicon.js";
 
