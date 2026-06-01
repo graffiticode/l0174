@@ -1,50 +1,27 @@
 {
   "id": "0174",
-  "description": "The base Graffiticode dialect. Evaluates small functional-programming expressions (arithmetic, lists, lambdas, map/filter/reduce, pattern matching, tags) and renders a handful of UI primitives (hello, image, theme, id). Right tool for 'compute this value' or 'render a hello/image/themed greeting' requests; domain-specific artifacts (assessments, spreadsheets, SVG, board content) belong in the higher-numbered dialects.",
-  "supported_item_types": [
-    "expression",
-    "rendered_ui"
-  ],
+  "description": "The Graffiticode forms language. Compiles a natural-language description of a web form into a hosted, themed single-page form: an ordered list of typed fields (text, email, number, tel, url, textarea, select, radio, checkbox, date) with labels, validation (required, min/max, length, pattern), light/dark theming, and a submit affordance (button label plus thank-you message or redirect). The webhook a submission is delivered to is supplied as structured config, never inferred from the description.",
+  "supported_item_types": ["form"],
   "example_prompts": [
     {
-      "prompt": "Double every number in [1 2 3 4] and then sum them.",
-      "produces": "expression",
-      "notes": "Exercises map + reduce on an explicit list — the canonical list-transformation pattern."
+      "prompt": "Create a contact form titled 'Get in touch' with Name (text, required), Email (email, required), Company (text), and Message (textarea, required, at least 20 characters). Submit button reads 'Send'. Light theme. Show a thank-you message after submit.",
+      "produces": "form",
+      "notes": "Canonical contact form — exercises text/email/textarea, required, a minLength validation, a submit label, and a post-submit thank-you."
     },
     {
-      "prompt": "Define a function `triple` that multiplies a number by 3, then map it over the range 1 to 5.",
-      "produces": "expression",
-      "notes": "Combines `let`-bound lambda, `range`, and `map` — covers user-defined functions applied to a generated list."
+      "prompt": "Make an RSVP form for a launch event. Fields: Full name (text, required), Email (email, required), Number of guests (number, min 0 max 5, required), Dietary notes (textarea). Dark theme.",
+      "produces": "form",
+      "notes": "Covers a numeric field with a min/max range and the dark theme."
     },
     {
-      "prompt": "Filter the even numbers out of [1 2 3 4 5 6] using a lambda with `eq` and `mod`.",
-      "produces": "expression",
-      "notes": "Pins down the predicate shape (eq (mod x 2) 0) so the translator doesn't guess between `mod` and a custom helper."
+      "prompt": "Build a feedback form with a Topic dropdown (Sales, Support, Other; required), a Rating radio (1 to 5), and a Subscribe checkbox. Submit reads 'Submit'.",
+      "produces": "form",
+      "notes": "Exercises the choice field types — select and radio with options, plus a single boolean checkbox."
     },
     {
-      "prompt": "Match a pair (x, y) and return whichever value is larger.",
-      "produces": "expression",
-      "notes": "Pattern matching on a pair — exercises `case` with destructuring plus a comparison operator."
-    },
-    {
-      "prompt": "Render a hello greeting for 'world' in the dark theme.",
-      "produces": "rendered_ui",
-      "notes": "Minimal UI program: `theme DARK hello \"world\"..` — covers the theme-wraps-hello composition."
-    },
-    {
-      "prompt": "Display the image at https://example.com/photo.jpg.",
-      "produces": "rendered_ui",
-      "notes": "Single-primitive UI program using the `image` function — the simplest rendered output L0174 can produce."
-    },
-    {
-      "prompt": "Define tags `yes` and `no`, then return `true` for `yes` and `false` for `no` using `case`.",
-      "produces": "expression",
-      "notes": "Exercises user-defined tags plus `case` dispatch — the core pattern for representing finite-choice values."
-    },
-    {
-      "prompt": "Sum the squares of the numbers from 1 to 10.",
-      "produces": "expression",
-      "notes": "Chains `range`, `map` with `pow x 2` (or a squaring lambda), and `reduce add 0` — a three-stage pipeline on computed inputs."
+      "prompt": "A newsletter signup with just an Email field (required, email) and a 'Join' button, dark theme.",
+      "produces": "form",
+      "notes": "Minimal single-field form — smallest useful output."
     }
   ]
 }

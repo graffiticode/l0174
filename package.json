@@ -20,6 +20,7 @@
     "start": "npm run -w packages/api start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "test": "npm run -w packages/core test",
     "format": "prettier --write .",
     "pack": "npm run build && npm -w packages/view pack",
     "publish": "npm -w packages/core publish --access=public && npm -w packages/view publish --access=public",

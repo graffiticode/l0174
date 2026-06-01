@@ -1,38 +1,55 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 # L0174 User Manual
 
-**Introduction**
+**L0174** is the Graffiticode *forms* language. A program describes a web form; compiling it
+produces a form-definition record that the L0174 `<Form>` renders as a hosted, themed,
+single-page form. Submissions are native task composition (an L0000 data tail under the form
+head) and can be delivered to a webhook bound via `config` (see the forms hook spec).
 
-*Graffiticode* is a collection of domain languages used for creating task
-specific web apps. **L0174** is a *Graffiticode* language for writing
-'hello, world' web apps.
+## Program shape
 
-L0174 can be used as a template for creating other, presumably more
-interesting and useful, languages.
-
-### Overview
-
-The code
+A program is a flat chain of top-level words terminated by `{}`:
 
 ```
-hello "world"..
+title 'Get in touch'
+theme LIGHT
+fields [
+  text     label 'Name'    required true {},
+  email    label 'Email'   required true {},
+  textarea label 'Message' required true minLength 20 {}
+]
+submit 'Send' {}..
 ```
 
-renders
+compiles to:
 
-| **hello, world!**
+```json
+{
+  "title": "Get in touch",
+  "theme": "light",
+  "fields": [
+    { "type": "text",     "name": "name",    "label": "Name",    "required": true },
+    { "type": "email",    "name": "email",   "label": "Email",   "required": true },
+    { "type": "textarea", "name": "message", "label": "Message", "required": true, "minLength": 20 }
+  ],
+  "submit": { "label": "Send" }
+}
+```
 
-in the browser view.
+## Vocabulary
 
-### Vocabulary
+| Word | Kind | Arity | Meaning |
+|---|---|---|---|
+| `title` | top-level | 2 | Form title |
+| `theme` | top-level | 2 | `DARK` / `LIGHT` → `"dark"` / `"light"` |
+| `fields` | collection | 2 | Ordered list of field elements |
+| `submit` | top-level | 2 | Submit button label (or a `{ label, thankyou, redirect }` record) |
+| `metadata` | top-level | 2 | Reserved form-level metadata |
+| `text` `email` `number` `tel` `url` `textarea` `select` `radio` `checkbox` `date` | element | 1 | A field of that type |
+| `label` `name` `placeholder` `help` `required` `min` `max` `minLength` `maxLength` `pattern` `options` | attribute | 2 | Field attributes (chain before the field's `{}`) |
 
+## Notes
 
-| Function  | Arity | Example  | Description |
-| --------- | :---: | -------- | ----------- |
-| **hello** | 1     | `hello "world"` | renders **hello, world!** in the form |
-| **val**   | 2     | `val ob "x"` | returns the value of `x` in `ob` |
-| **concat**| 1     | `concat [x,y]` | returns the string value that is the concatentation of the values of x and y |
-| **add**   | 2     | `add x y` | returns the sum of values of `x` and `y` |
-| **map**   | 2     | `map fn [1,2,3]` | returns a list containing the result of applying `fn` to each element in the list `[1,2,3]` |
-| **data**  | 1     | `data ob` | returns the value of data passed to the current task, or otherwise the value of `ob` |
-
+- A field's submission `name` defaults to a slug of its `label` (`"Full name"` → `full_name`); override with `name`.
+- `select` and `radio` require a non-empty `options` list; a bare `checkbox` is a single boolean.
+- The webhook binding is supplied as `config.webhook`, not in the program text.

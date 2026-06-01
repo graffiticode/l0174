@@ -1,7 +1,7 @@
 {
   "name": "@graffiticode/l0174",
   "version": "0.1.0",
-  "description": "L0174 — a Graffiticode dialect (hello/image/theme/print) inheriting @graffiticode/l0000",
+  "description": "L0174 — the Graffiticode forms language (form/fields/validation) inheriting @graffiticode/l0000",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -19,12 +19,15 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "build-static": "node tools/build-static.js",
+    "test": "vitest run",
     "lint": "eslint src tools"
   },
   "dependencies": {
     "@graffiticode/l0000": "^0.1.1"
   },
   "devDependencies": {
-    "spec-md": "^3.1.0"
+    "@graffiticode/parser": "^1.5.14",
+    "spec-md": "^3.1.0",
+    "vitest": "^2.1.3"
   }
 }

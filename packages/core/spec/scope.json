@@ -1,18 +1,20 @@
 {
   "id": "0174",
-  "summary": "Base Graffiticode dialect — a small functional language for evaluating expressions or rendering simple UI primitives.",
+  "summary": "The Graffiticode forms language — compiles a description of a web form (fields, validation, theming, submit affordance) into a hosted, single-page form whose submissions can be delivered to a bound webhook.",
   "in_scope": [
-    "Arithmetic, string manipulation, list construction and traversal, ranges",
-    "Lambdas, let-bound helpers, pattern matching on numbers/lists/pairs/records/tags",
-    "map / filter / reduce over lists",
-    "Comparison operators (eq / ne / gt / lt / ge / le)",
-    "UI primitives: hello (greetings), image (URL), theme (DARK / LIGHT), id (element identifier)"
+    "Single-page forms with an ordered list of fields",
+    "Field types: text, email, number, tel, url, textarea, select, radio, checkbox, date",
+    "Per-field config: label, name, placeholder, help, required",
+    "Validation: min / max (number, date), minLength / maxLength, pattern (regex), required",
+    "Theming: light / dark (DARK / LIGHT tags)",
+    "Submit affordance: button label, post-submit thank-you message or redirect URL",
+    "Webhook binding supplied as structured config (config.webhook), never inferred from prose"
   ],
   "out_of_scope": [
-    "Anything that produces a domain-specific artifact (assessments, spreadsheets, charts, maps, diagrams, boards, data pipelines, games, puzzles) — those belong in higher-numbered dialects, not in L0174",
-    "External data (HTTP, file, database) — L0174 evaluates a closed program",
-    "Stateful or streaming operations",
-    "Custom rendering beyond hello / image / theme / id",
-    "Cross-language composition via import — each item runs in exactly one dialect"
+    "Multi-page or branching/conditional forms and conditional fields",
+    "File uploads, payments, e-signatures, calculated fields",
+    "Email notifications (delivery is via the bound webhook)",
+    "Tabular input or grading (use L0166); charts (use L0173); reshaping collected submissions (use L0170)",
+    "Arbitrary custom rendering beyond the supported field types"
   ]
 }

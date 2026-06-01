@@ -1,41 +1,46 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 # L0174 Dialect Extensions
 
-L0174 is the base dialect of Graffiticode, focused on simple interactions and visualizations.
+L0174 is the Graffiticode forms dialect. On top of the L0000 core it adds vocabulary for
+authoring web forms: a flat chain of top-level words (`title`, `theme`, `fields`, `submit`,
+`metadata`) terminated by `{}`, where `fields` wraps a list of field elements.
 
-## L0174 Functions
+## L0174 field elements (arity 1)
 
-| Function | Signature | Description |
-| :------- | :-------- | :---------- |
-| `hello` | `<string: record>` | Renders a "hello, {string}!" greeting |
-| `image` | `<string: record>` | Renders an image from a URL |
-| `theme` | `<tag record: record>` | Sets UI theme (DARK or LIGHT) wrapping a body expression |
-| `id` | `<string any: record>` | Sets an element identifier |
+`text` `email` `number` `tel` `url` `textarea` `select` `radio` `checkbox` `date` — each
+takes a chained attribute record and stamps the field `type`.
 
-## L0174 Built-in Tags
+## L0174 field attributes (arity 2, chainable)
 
-- `DARK` — dark theme
-- `LIGHT` — light theme
+`label` `name` `placeholder` `help` `required` `min` `max` `minLength` `maxLength` `pattern`
+`options` — each takes a value and the rest of the field, e.g. `required true`.
 
-## L0174 Examples
+## L0174 top-level words (arity 2)
 
-### Hello world
+`title` `theme` (`DARK`/`LIGHT`) `submit` `metadata`, plus the `fields` collection.
+
+## Examples
+
+A contact form:
+
 ```
-hello "world"..
+title 'Get in touch'
+theme LIGHT
+fields [
+  text     label 'Name'    required true {},
+  email    label 'Email'   required true {},
+  text     label 'Company' {},
+  textarea label 'Message' required true minLength 20 {}
+]
+submit 'Send' {}..
 ```
 
-### Themed greeting
-```
-theme DARK hello "world"..
-```
+Choice fields (`select`/`radio` need `options`; a bare `checkbox` is a boolean):
 
-### Image display
 ```
-image "https://example.com/photo.jpg"..
-```
-
-### Combining core and L0174 functions
-```
-let name = "world"..
-theme LIGHT hello name..
+fields [
+  select   label 'Topic'     options ['Sales' 'Support' 'Other'] required true {},
+  radio    label 'Rating'    options ['1' '2' '3' '4' '5'] {},
+  checkbox label 'Subscribe' {}
+] {}..
 ```
