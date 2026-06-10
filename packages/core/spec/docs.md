@@ -4,7 +4,10 @@
 **L0174** is the Graffiticode *forms* language. A program describes a web form; compiling it
 produces a form-definition record that the L0174 `<Form>` renders as a hosted, themed,
 single-page form. Submissions are native task composition (an L0000 data tail under the form
-head) and can be delivered to a webhook bound via `config` (see the forms hook spec).
+head) and can be delivered to a webhook bound via `config` (see the forms hook spec). The data
+tail carries submitted answers namespaced under `values` (e.g. `{ "values": { "email": "a@b.c" } }`),
+keeping them separate from the form-definition keys; the `<Form>` reads `data.values` to
+pre-populate controls on load.
 
 ## Program shape
 

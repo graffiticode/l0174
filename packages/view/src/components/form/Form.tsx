@@ -44,13 +44,20 @@ function parentOrigin(): string | undefined {
 }
 
 export const Form = ({ state }: FormProps) => {
+  const { apply } = state;
   const errors: CompileError[] = state.errors ?? [];
   const data = state.data ?? {};
   const fields: FieldDef[] = Array.isArray(data.fields) ? data.fields : [];
   const submit = data.submit ?? {};
 
   const [theme, setTheme] = useState<string | undefined>(data.theme);
-  const [values, setValues] = useState<Record<string, any>>({});
+  // Seed once from any previously-submitted values carried in the compiled data. Answers
+  // are namespaced under `data.values` (kept separate from the form-definition keys); the
+  // View only mounts Form once `state.data` is renderable, so this lazy initializer sees them.
+  const [values, setValues] = useState<Record<string, any>>(() => {
+    const v = data.values;
+    return v && typeof v === "object" && !Array.isArray(v) ? { ...v } : {};
+  });
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
 
@@ -70,12 +77,18 @@ export const Form = ({ state }: FormProps) => {
     setFieldErrors(errs);
     if (Object.keys(errs).length > 0) return;
 
+    // Capture answers into the shared View state (submit-time only, never per keystroke).
+    // Namespaced under `values` so they stay separate from the form-definition keys and
+    // round-trip through compile back into `data.values`.
+    apply({ type: "update", args: { values } });
+
     // Emit the submission to the embedding parent (delivery to the bound webhook is handled
-    // downstream by the platform — out of scope for the renderer).
+    // downstream by the platform — out of scope for the renderer). Namespaced to match the
+    // load/prefill contract: the data tail carries answers under `values`.
     const origin = parentOrigin();
     if (origin) {
       window.parent.postMessage(
-        { type: "submit", title: data.title, data: values },
+        { type: "submit", title: data.title, data: { values } },
         origin,
       );
     }
